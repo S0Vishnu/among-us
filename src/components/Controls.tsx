@@ -1,5 +1,5 @@
 import { CapsuleCollider, RigidBody } from "@react-three/rapier";
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { Group } from "three";
 import { Cruemate } from "./avatar/Cruemate";
 
@@ -14,7 +14,28 @@ export default function Controls({ character }: ControlsProps) {
   // Ref types for character and related objects
   const characterMainRef = useRef<any>(null); // Changed to RigidBody type
   const characterRef = useRef<Group>(null);
+  // dummy start
 
+  // Toggle animation when "t" key is pressed
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "t" || event.key === "T") {
+        // Toggle between 'idle' and 'run'
+        setAnimation((prevAnimation) =>
+          prevAnimation === "idle" ? "run" : "idle"
+        );
+      }
+    };
+
+    // Add event listener for keydown
+    window.addEventListener("keydown", handleKeyDown);
+
+    // Cleanup on component unmount
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+  // dummy end
   return (
     <Suspense fallback={null}>
       {/* Character Control */}

@@ -6,7 +6,7 @@ import type { OrthographicCamera as THREEOrthographicCamera } from "three";
 import Controls from "./Controls";
 // levels
 import Level from "./levels/Level_main";
-import Plane from "./levels/Level_zero";
+// import Plane from "./levels/Level_zero";
 
 export default function GameWorld() {
   const shadowCameraRef = useRef<THREEOrthographicCamera | null>(null); // Updated type
